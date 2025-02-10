@@ -1,24 +1,26 @@
-public class ClosedState implements AccountState{
+public class ClosedState implements AccountState {
     @Override
-    public void deposit(double depositAmount) {
-        System.out.println("You cannot deposit a closed account!");
-        System.out.println(toString());
+    public void deposit(double depositAmount, Account account) {
+        System.out.println("You cannot deposit on a closed account!");
     }
+
     @Override
-    public void withdraw(double withdrawAmount) {
-        System.out.println("You cannot withdraw a closed account!");
+    public void withdraw(double withdrawAmount, Account account) {
+        System.out.println("You cannot withdraw on a closed account!");
     }
+
     @Override
-    public void activate() {
+    public void activate(Account account) {
         System.out.println("You cannot activate a closed account!");
     }
+
     @Override
-    public void suspend() {
+    public void suspend(Account account) {
         System.out.println("You cannot suspend a closed account!");
     }
+
     @Override
-    public void close() {
-        System.out.println("You cannot withdraw on a closed account!");
-        System.out.println(toString());
+    public void close(Account account) {
+        System.out.println("Account is already closed!");
     }
 }

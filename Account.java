@@ -1,38 +1,52 @@
-public class Account{
-    public String accountNumber;
-    public double balance;
-    public AccountState accountState;
+public class Account {
+    private String accountNumber;
+    private double balance;
+    private AccountState accountState;
 
-    public Account(String accountNumber, double balance){
+    public Account(String accountNumber, double balance) {
         this.accountNumber = accountNumber;
         this.balance = balance;
-        accountState = new ActiveState();
+        this.accountState = new ActiveState();
     }
 
-    public void setState(AccountState accountState){
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public void setState(AccountState accountState) {
         this.accountState = accountState;
     }
 
-    public AccountState getState(){
-        return this.accountState;
+    public void deposit(double depositAmount) {
+        accountState.deposit(depositAmount, this);
     }
 
-    public void deposit(Double depositAmount){
-        accountState.deposit(depositAmount);
+    public void withdraw(double withdrawAmount) {
+        accountState.withdraw(withdrawAmount, this);
     }
-    public void withdraw(Double withdrawAmount){
-        accountState.withdraw(withdrawAmount);
+
+    public void activate() {
+        accountState.activate(this);
     }
-    public void activate(){
-        accountState.activate();
+
+    public void suspend() {
+        accountState.suspend(this);
     }
-    public void suspend(){
-       accountState.suspend();
+
+    public void close() {
+        accountState.close(this);
     }
-    public void close(){
-        accountState.close();
-    }
-    public String toString(){
-        return "Account Number: " + accountNumber + " Balance: " + balance;    
+
+    @Override
+    public String toString() {
+        return "Account Number: " + accountNumber + ", Balance: " + balance;
     }
 }
